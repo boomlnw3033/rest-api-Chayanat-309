@@ -1,17 +1,15 @@
 const express = require('express')
-
 const bodyParser = require('body-parser')
+const books = require('./db')
+const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-const app = express()
 
 app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
-const books = require('./db')
 app.get('/books', (req, res) => {
   res.json(books)
 })
@@ -31,11 +29,12 @@ app.put('/books/:id', (req, res) => {
 })
 
 app.delete('/books/:id', (req, res) => {
-  const deletedIndex = books.findIndex(book => book.id === req.params.id)
-  books.splice(deletedIndex, 1)
+  const deleteIndex = books.findIndex(book => book.id === req.params.id)
+  books.splice(deleteIndex, 1)
   res.status(204).send()
 })
 
 app.listen(3000, () => {
-  console.log('http://localhost:3000')
+  console.log('Start server at port 3000.')
+  console.log('http://localhost:3000.')
 })
