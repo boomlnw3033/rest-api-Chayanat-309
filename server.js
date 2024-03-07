@@ -7,11 +7,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.status(200).send('Hello World')
 })
 
 app.get('/books', (req, res) => {
-  res.json(books)
+  res.status(200).json(books)
 })
 
 app.get('/books/:id', (req, res) => {
@@ -25,7 +25,7 @@ app.post('/books', (req, res) => {
 
 app.put('/books/:id', (req, res) => {
   const updateIndex = books.findIndex(book => book.id === req.params.id)
-  res.json(Object.assign(books[updateIndex], req.body))
+  res.status(200).json(Object.assign(books[updateIndex], req.body))
 })
 
 app.delete('/books/:id', (req, res) => {
